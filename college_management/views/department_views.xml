@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Department Form View -->
+    <record id="view_college_department_form" model="ir.ui.view">
+        <field name="name">college.department.form</field>
+        <field name="model">college.department</field>
+        <field name="arch" type="xml">
+            <form string="Department">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="hod_name"/>
+                        </group>
+                        <group>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description">
+                            <field name="description"/>
+                        </page>
+                        <page string="Students">
+                            <field name="student_ids"/>
+                        </page>
+                        <page string="Courses">
+                            <field name="course_ids"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Department Tree/List View -->
+    <record id="view_college_department_tree" model="ir.ui.view">
+        <field name="name">college.department.tree</field>
+        <field name="model">college.department</field>
+        <field name="arch" type="xml">
+            <tree string="Departments">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="hod_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action for Department -->
+    <record id="action_college_department" model="ir.actions.act_window">
+        <field name="name">Departments</field>
+        <field name="res_model">college.department</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

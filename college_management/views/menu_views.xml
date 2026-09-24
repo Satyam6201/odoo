@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Top Level Menu -->
+    <menuitem id="menu_college_management_root" name="College Management" sequence="10"/>
+
+    <!-- Submenus for Sections -->
+    <menuitem id="menu_college_students" name="Students" parent="menu_college_management_root" sequence="10"/>
+    <menuitem id="menu_college_departments" name="Departments" parent="menu_college_management_root" sequence="20"/>
+    <menuitem id="menu_college_courses" name="Courses" parent="menu_college_management_root" sequence="30"/>
+
+    <!-- Menu Actions -->
+    <menuitem id="menu_all_students" name="All Students" parent="menu_college_students" action="action_college_student" sequence="10"/>
+    <menuitem id="menu_all_departments" name="All Departments" parent="menu_college_departments" action="action_college_department" sequence="10"/>
+    <menuitem id="menu_all_courses" name="All Courses" parent="menu_college_courses" action="action_college_course" sequence="10"/>
+</odoo>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Student Form View -->
+    <record id="view_college_student_form" model="ir.ui.view">
+        <field name="name">college.student.form</field>
+        <field name="model">college.student</field>
+        <field name="arch" type="xml">
+            <form string="Student">
+                <sheet>
+                    <!-- Displaying Profile Image -->
+                    <field name="profile_image" widget="image" class="oe_avatar"/>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Student Name"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <!-- Personal Information -->
+                        <group string="Personal Information">
+                            <field name="date_of_birth"/>
+                            <field name="gender"/>
+                        </group>
+                        <!-- Academic Information -->
+                        <group string="Academic Information">
+                            <field name="roll_number"/>
+                            <field name="student_id"/>
+                            <field name="department_id"/>
+                            <field name="course_id"/>
+                            <field name="semester"/>
+                            <field name="admission_date"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                    <group string="Contact Information">
+                        <group>
+                            <field name="email"/>
+                            <field name="phone"/>
+                        </group>
+                        <group>
+                            <field name="address"/>
+                            <field name="city"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Student Tree/List View -->
+    <record id="view_college_student_tree" model="ir.ui.view">
+        <field name="name">college.student.tree</field>
+        <field name="model">college.student</field>
+        <field name="arch" type="xml">
+            <tree string="Students">
+                <field name="name"/>
+                <field name="roll_number"/>
+                <field name="email"/>
+                <field name="phone"/>
+                <field name="department_id"/>
+                <field name="course_id"/>
+                <field name="semester"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Student Search View -->
+    <record id="view_college_student_search" model="ir.ui.view">
+        <field name="name">college.student.search</field>
+        <field name="model">college.student</field>
+        <field name="arch" type="xml">
+            <search string="Search Students">
+                <field name="name"/>
+                <field name="roll_number"/>
+                <field name="email"/>
+                
+                <separator/>
+                <filter string="Active Students" name="active_students" domain="[('active', '=', True)]"/>
+                <filter string="Inactive Students" name="inactive_students" domain="[('active', '=', False)]"/>
+                
+                <group expand="0" string="Group By">
+                    <filter string="Department" name="group_by_department" context="{'group_by':'department_id'}"/>
+                    <filter string="Course" name="group_by_course" context="{'group_by':'course_id'}"/>
+                    <filter string="Semester" name="group_by_semester" context="{'group_by':'semester'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Action for Student -->
+    <record id="action_college_student" model="ir.actions.act_window">
+        <field name="name">Students</field>
+        <field name="res_model">college.student</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
