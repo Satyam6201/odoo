@@ -3,7 +3,7 @@
     'version': '1.0',
     'summary': 'Manage college students, departments, and courses',
     'description': 'A simple module to manage student information, departments, and courses in a college.',
-    'author': 'Antigravity',
+    'author': 'Satyam',
     'depends': ['base'],
     'data': [
         'security/ir.model.access.csv',

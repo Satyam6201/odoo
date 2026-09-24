@@ -7,8 +7,8 @@ services:
     ports:
       - "8069:8069"
     volumes:
-      # This maps your local module into the Odoo container's addons path
       - ./employee_management:/mnt/extra-addons/employee_management
+      - ./college_management:/mnt/extra-addons/college_management
     environment:
       - HOST=db
       - USER=odoo

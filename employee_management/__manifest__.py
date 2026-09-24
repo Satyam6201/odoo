@@ -4,7 +4,7 @@
     'summary': 'Manage basic employee information',
     'description': 'A simple module for learning Odoo development, managing employees and departments.',
     'category': 'Human Resources',
-    'author': 'Learning Odoo',
+    'author': 'Satyam',
     'depends': ['base'],
     'data': [
         'security/ir.model.access.csv',
