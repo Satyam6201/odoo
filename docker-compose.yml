@@ -9,6 +9,7 @@ services:
     volumes:
       - ./employee_management:/mnt/extra-addons/employee_management
       - ./college_management:/mnt/extra-addons/college_management
+      - ./custom_invoice:/mnt/extra-addons/custom_invoice
     environment:
       - HOST=db
       - USER=odoo
