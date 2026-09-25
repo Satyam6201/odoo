@@ -1,9 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="report_invoice_document_inherit_tally" inherit_id="account.report_invoice_document">
         <xpath expr="//div[hasclass('page')]" position="replace">
             <div class="page" style="font-family: Arial, sans-serif; font-size: 13px;">
-                <!-- Header -->
                 <div class="row" style="border: 1px solid black; padding: 10px; margin-bottom: 0;">
                     <div class="col-12 text-center">
                         <h4 style="margin: 0;"><strong>TAX INVOICE</strong></h4>
@@ -24,7 +22,6 @@
                     </div>
                 </div>
 
-                <!-- Customer Details -->
                 <div class="row" style="border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; padding: 10px; margin: 0;">
                     <div class="col-12">
                         <div><strong>Customer / Bill To:</strong></div>
@@ -35,7 +32,6 @@
                     </div>
                 </div>
 
-                <!-- Product Table -->
                 <div class="row" style="margin: 0; border-left: 1px solid black; border-right: 1px solid black;">
                     <table class="table table-sm" style="margin-bottom: 0; width: 100%; border-collapse: collapse;">
                         <thead>
@@ -70,7 +66,6 @@
                     </table>
                 </div>
 
-                <!-- Totals -->
                 <div class="row" style="border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; border-top: 1px solid black; padding: 10px; margin: 0;">
                     <div class="col-7">
                         <p><strong>Amount in Words:</strong><br/>
@@ -98,7 +93,6 @@
                     </div>
                 </div>
 
-                <!-- Bank and Signatures -->
                 <div class="row" style="border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; padding: 10px; margin: 0;">
                     <div class="col-6">
                         <strong>BANK DETAILS</strong><br/>
