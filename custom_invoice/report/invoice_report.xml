@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_invoice_document_inherit_tally" inherit_id="account.report_invoice_document">
+        <xpath expr="//div[hasclass('page')]" position="replace">
+            <div class="page" style="font-family: Arial, sans-serif; font-size: 13px;">
+                <!-- Header -->
+                <div class="row" style="border: 1px solid black; padding: 10px; margin-bottom: 0;">
+                    <div class="col-12 text-center">
+                        <h4 style="margin: 0;"><strong>TAX INVOICE</strong></h4>
+                    </div>
+                </div>
+                <div class="row" style="border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; padding: 10px; margin: 0;">
+                    <div class="col-6">
+                        <div style="font-size: 16px;"><strong><span t-field="o.company_id.name"/></strong></div>
+                        <div><span t-field="o.company_id.street"/>, <span t-field="o.company_id.street2"/></div>
+                        <div><span t-field="o.company_id.city"/> - <span t-field="o.company_id.zip"/>, <span t-field="o.company_id.state_id.name"/></div>
+                        <div>Phone: <span t-field="o.company_id.phone"/> | Email: <span t-field="o.company_id.email"/></div>
+                        <div><strong>GSTIN: <span t-field="o.company_id.vat"/></strong></div>
+                    </div>
+                    <div class="col-6 text-right">
+                        <div><strong>Invoice No: </strong> <span t-field="o.name"/></div>
+                        <div><strong>Invoice Date: </strong> <span t-field="o.invoice_date"/></div>
+                        <div t-if="o.customer_po_number"><strong>Customer PO: </strong> <span t-field="o.customer_po_number"/></div>
+                    </div>
+                </div>
+
+                <!-- Customer Details -->
+                <div class="row" style="border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; padding: 10px; margin: 0;">
+                    <div class="col-12">
+                        <div><strong>Customer / Bill To:</strong></div>
+                        <div><strong><span t-field="o.partner_id.name"/></strong></div>
+                        <div><span t-field="o.partner_id.street"/>, <span t-field="o.partner_id.street2"/></div>
+                        <div><span t-field="o.partner_id.city"/> - <span t-field="o.partner_id.zip"/>, <span t-field="o.partner_id.state_id.name"/></div>
+                        <div><strong>GSTIN: <span t-field="o.partner_id.vat"/></strong></div>
+                    </div>
+                </div>
+
+                <!-- Product Table -->
+                <div class="row" style="margin: 0; border-left: 1px solid black; border-right: 1px solid black;">
+                    <table class="table table-sm" style="margin-bottom: 0; width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="border-bottom: 1px solid black;">
+                                <th style="border-right: 1px solid black; width: 5%;">S.No</th>
+                                <th style="border-right: 1px solid black; width: 45%;">Description</th>
+                                <th style="border-right: 1px solid black; width: 10%; text-align: right;">Qty</th>
+                                <th style="border-right: 1px solid black; width: 15%; text-align: right;">Rate</th>
+                                <th style="border-right: 1px solid black; width: 10%; text-align: right;">Taxes</th>
+                                <th style="width: 15%; text-align: right;">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody class="invoice_tbody">
+                            <t t-set="current_subtotal" t-value="0"/>
+                            <t t-set="line_count" t-value="0"/>
+                            <t t-foreach="o.invoice_line_ids" t-as="line">
+                                <t t-if="not line.display_type">
+                                    <t t-set="line_count" t-value="line_count + 1"/>
+                                    <tr style="border-bottom: 1px dotted lightgray;">
+                                        <td style="border-right: 1px solid black;"><span t-esc="line_count"/></td>
+                                        <td style="border-right: 1px solid black;"><span t-field="line.name" t-options="{'widget': 'text'}"/></td>
+                                        <td style="border-right: 1px solid black; text-align: right;"><span t-field="line.quantity"/></td>
+                                        <td style="border-right: 1px solid black; text-align: right;"><span t-field="line.price_unit"/></td>
+                                        <td style="border-right: 1px solid black; text-align: right;">
+                                            <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))" id="line_tax_ids"/>
+                                        </td>
+                                        <td style="text-align: right;"><span t-field="line.price_subtotal"/></td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Totals -->
+                <div class="row" style="border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; border-top: 1px solid black; padding: 10px; margin: 0;">
+                    <div class="col-7">
+                        <p><strong>Amount in Words:</strong><br/>
+                        <span t-esc="o.currency_id.amount_to_text(o.amount_total)"/></p>
+                    </div>
+                    <div class="col-5">
+                        <table class="table table-sm table-borderless" style="margin-bottom: 0;">
+                            <tr>
+                                <td><strong>Subtotal:</strong></td>
+                                <td class="text-right"><span t-field="o.amount_untaxed"/></td>
+                            </tr>
+                            <t t-foreach="o.amount_by_group" t-as="amount_by_group">
+                                <tr>
+                                    <td><span t-esc="amount_by_group[0]"/></td>
+                                    <td class="text-right">
+                                        <span t-esc="amount_by_group[1]" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                    </td>
+                                </tr>
+                            </t>
+                            <tr style="border-top: 1px solid black;">
+                                <td><strong>Grand Total:</strong></td>
+                                <td class="text-right"><strong><span t-field="o.amount_total"/></strong></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Bank and Signatures -->
+                <div class="row" style="border-left: 1px solid black; border-right: 1px solid black; border-bottom: 1px solid black; padding: 10px; margin: 0;">
+                    <div class="col-6">
+                        <strong>BANK DETAILS</strong><br/>
+                        Bank Name: <span t-field="o.bank_name"/><br/>
+                        Account Number: <span t-field="o.bank_account_number"/><br/>
+                        IFSC Code: <span t-field="o.bank_ifsc_code"/><br/>
+                        <br/>
+                        <strong>Terms &amp; Conditions:</strong><br/>
+                        <span t-field="o.terms_and_conditions" style="white-space: pre-line;"/>
+                    </div>
+                    <div class="col-6 text-right" style="position: relative;">
+                        <div><strong>For <span t-field="o.company_id.name"/></strong></div>
+                        <div style="position: absolute; bottom: 0; right: 15px;">
+                            <strong>Authorized Signatory</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
