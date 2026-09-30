@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- Department List/Tree View -->
+    <!-- Department List -->
     <record id="view_employee_department_tree" model="ir.ui.view">
         <field name="name">employee.department.tree</field>
         <field name="model">employee.department</field>

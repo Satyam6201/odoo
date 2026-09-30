@@ -106,5 +106,4 @@
               parent="menu_employee_management_root" 
               action="action_employee_department" 
               sequence="20"/>
-
 </odoo>
