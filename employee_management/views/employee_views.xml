@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- Employee List/Tree View -->
+    <!-- Employee List -->
     <record id="view_employee_management_tree" model="ir.ui.view">
         <field name="name">employee.management.tree</field>
         <field name="model">employee.management</field>
@@ -91,7 +91,6 @@
         </field>
     </record>
 
-    <!-- Menus -->
     <!-- Top Level Menu -->
     <menuitem id="menu_employee_management_root" name="Employee Management" sequence="10"/>
 
